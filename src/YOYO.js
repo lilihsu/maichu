@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState ,useEffect, useRef} from 'react'
 import Jitsi from 'react-jitsi'
 import { database, storage } from "./firebase";
 import imageDataURI from 'image-data-uri';
@@ -23,13 +23,18 @@ const YOYO = (props) => {
   //     screenshot();
   //   }
   // }, 500);
+  const mounted = useRef();
 
   useEffect(()=>{
     database.ref('candidate').on('value',e=>{
       setChsnName(e.val().id);
       console.log(e.val())
     });
+
+    
   })
+
+  
 
   const uploadImage = (image)=>{
     //storage.child('screenShot').delete();
@@ -79,7 +84,9 @@ const YOYO = (props) => {
       // dataURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAA..."
   });
 
-  }
+  };
+
+
   return onCall
     ? (
       <>
@@ -91,11 +98,9 @@ const YOYO = (props) => {
         frameStyle={{display:true}}
         onAPILoad={JitsiMeetAPI => {
           setapi(JitsiMeetAPI)
-          await showuser()
-          props.setGroupCount(props.roomName,userlist.length)
         }}
       />
-      <button onClick={showuser}>press</button>
+      <button onClick={()=>{showuser();props.setGroupCount(props.roomName,userlist.length)}}>press</button>
       <button onClick={getdevice}>getdevice</button>
       <input type='text' placeholder='Send Message!' value={sendmessage} onChange={e => setSendMessage(e.target.value)} />
       <button onClick={screenshot}>ENTER</button>
@@ -108,7 +113,7 @@ const YOYO = (props) => {
       <>
         <h1>Create a Meeting</h1>
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
-        <button onClick={() => setOnCall(true)}> Let&apos;s start!</button>
+        <button onClick={() =>{setOnCall(true)}}> Let&apos;s start!</button>
         
       </>
     )
