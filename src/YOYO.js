@@ -91,7 +91,7 @@ const YOYO = (props) => {
         frameStyle={{display:true}}
         onAPILoad={JitsiMeetAPI => {
           setapi(JitsiMeetAPI)
-          showuser()
+          await showuser()
           props.setGroupCount(props.roomName,userlist.length)
         }}
       />
@@ -106,7 +106,7 @@ const YOYO = (props) => {
       )
     : (
       <>
-        <h1>Crate a Meeting</h1>
+        <h1>Create a Meeting</h1>
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
         <button onClick={() => setOnCall(true)}> Let&apos;s start!</button>
         
