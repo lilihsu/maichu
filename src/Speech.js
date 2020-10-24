@@ -1,6 +1,7 @@
 import React , {Component, useState } from 'react';
 import Layout from './components/Layout';
 import {Header, Grid} from 'semantic-ui-react';
+import YOYO from './YOYO';
 class Speech_test extends Component {
     render() {
       return (
@@ -12,7 +13,7 @@ class Speech_test extends Component {
             <Grid celled>
               <Grid.Row>
                 <Grid.Column width={13}>
-                  <Speech inline-block />
+                  <YOYO inline-block />
                 </Grid.Column>
                 <Grid.Column width={3}>
                   <h4>Function bar</h4>

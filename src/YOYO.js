@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Jitsi from 'react-jitsi'
- 
+import { storage } from "./firebase";
+import imageDataURI from 'image-data-uri';
 const YOYO = () => {
  
 
@@ -20,7 +21,10 @@ const YOYO = () => {
   //     screenshot();
   //   }
   // }, 500);
-
+  const uploadImage = (image)=>{
+    //storage.child('screenShot').delete();
+    storage.ref(`screenShot/${image.name}`).put(image);
+  }
   const showuser = async() => {
     setuserlist(await api.getParticipantsInfo());
     console.log(userlist);
@@ -36,9 +40,20 @@ const YOYO = () => {
     await api.resizeLargeVideo('400px', '300px');
     await api.captureLargeVideoScreenshot().then(dataURL => {
       // console.log(dataURL);
-      // 
+      // // 
+      // uploadImage(dataURL);
       setreceiveMessage(dataURL.dataURL);
-      console.log(receivemessage);
+      // Some image data uri
+      
+      
+      // It will create the full path in case it doesn't exist
+      // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
+      // let filePath = './out/path/filename';
+      
+      // // Returns a Promise
+      // imageDataURI.outputFile(dataURL.dataURL, filePath)
+      // .then(res => console.log(res))
+       console.log(receivemessage);
       //setpicArray(dataURL.dataURL)
       //console.log(picArray[0]);
       setflag(true);
