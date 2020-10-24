@@ -29,12 +29,13 @@ class FunctionHelper extends Component {
             this.forceUpdate();
         }
     }
+    constructor(props) {super(props)}
     
     handleGroup = () => {
-        this.setState({de:false, group: true, queue: false, qa: false })
+        this.setState({de:false, group: true, queue: false, qa: false ,cs: false})
     }
     handleQueue = () => {
-        this.setState({de:false, group: false, queue: true, qa: false })
+        this.setState({de:false, group: false, queue: true, qa: false ,cs: false})
     }
     handleQA = () => {
         this.setState({de:false, group: false, queue: false, qa: true})
@@ -48,10 +49,13 @@ class FunctionHelper extends Component {
         }
     }
     handleCS = () => {
-        this.setState({de:false, group: false, queue: false, qa: false})
+        this.setState({de:false, group: false, queue: false, qa: false,cs: true})
+    }
+    handleEmotion = () => {
+        this.setState({de:false, group: false, queue: false, qa: false,cs: false})
     }
     handleBack = (e) => {
-        this.setState({de:true, group: false})
+        this.setState({de:true, group: false, queue:false, qa:false,cs: false})
     }
     render() {
         
@@ -84,11 +88,19 @@ class FunctionHelper extends Component {
                         <Button onClick={this.getuserlist}>
                             get user
                         </Button>
+                        <Button onClick={this.handleEmotion}>
+                            Check Student Emotion
+                        </Button>
                     </Grid.Row>
                 </Grid>) : 
                 this.state.group ? <Group handler={this.handleBack} /> : 
                 this.state.queue ? <Queue handler={this.handleBack} userlist={this.state.processedUserList}/> :
-                this.state.qa ? <QA handler={this.handleBack}  mode={this.state.qqaamode}/> : <ChooseSpeaker handler={this.handleBack} />
+                this.state.qa ? <QA handler={this.handleBack}  mode={this.state.qqaamode}/> : 
+                 
+                this.state.cs ? <ChooseSpeaker handler={this.handleBack} /> : 
+                <EmotionDetect handler={this.handleBack} 
+                    emotion={this.props.emotion}
+                />
 
             
         )
@@ -149,6 +161,34 @@ class QA extends Component {
         {(!this.props.mode)?<div>this is Asian Mode</div>:<div>this is Foreign Mode</div>}
         </>
         );
+    }
+}
+
+class EmotionDetect extends Component {
+    state={
+        id: "",
+        show: false
+    }
+    constructor(props){super(props)}
+    handleSubmit = () => {
+        this.setState({show: true})
+    }
+    render(){
+        return(
+            <>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Field>
+                    <Input placeholder="Student ID"
+                        onChange={event=>this.setState({id:event.target.value})}
+                    />
+                </Form.Field>
+                <Button type="submit">Check</Button>
+            </Form>
+            <Message visible={this.state.show}>
+                <Message.Header>{this.props.emotion}</Message.Header>
+            </Message>
+            </>
+        )
     }
 }
 

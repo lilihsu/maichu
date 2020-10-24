@@ -3,14 +3,15 @@ import Layout from '../components/Layout';
 import {Header, Grid} from 'semantic-ui-react';
 import YOYO from '../YOYO';
 import AdminFuncHelper from './AdminFuncList';
-
+import {database} from "../firebase/";
 
 class Administrator extends Component {
   constructor(props) {
     super(props);
     this.state={
       roomName: "",
-      arr:[]
+      arr:[],
+      emotion:null
     }
   }
   
@@ -20,7 +21,14 @@ class Administrator extends Component {
   getV = () => {
     return this.state.arr;
   }
+  componentDidMount(){
+    database.ref('CUR_EMOTION').on('value',e=>{
+      this.setState({emotion:e.val()});
+      console.log(e.val())
+    });
+  }
   render() {
+    
     return (
       <Layout>
         <script src='https://meet.jit.si/external_api.js'></script>
@@ -35,7 +43,7 @@ class Administrator extends Component {
                 <YOYO inline-block  test={this.setV} roomName={this.state.roomName}/>
               </Grid.Column>
               <Grid.Column width={3}>
-                <AdminFuncHelper  userlist={this.state.arr} roomName={this.state.roomName}/>
+                <AdminFuncHelper  userlist={this.state.arr} roomName={this.state.roomName} emotion={this.state.emotion}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>
