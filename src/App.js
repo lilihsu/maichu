@@ -11,12 +11,6 @@ class App extends Component {
   constructor(props){
     super(props)
   }
-  UploadButton=e=>{
-    if(e.target.files[0]){
-      this.setState({image:e.target.files[0]});
-    }
-  }
-
   uploadImage=(image)=>{
     storage.child('screenShot').delete();
     storage.ref(`screenShot/${image.name}`).put(image);
