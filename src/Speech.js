@@ -100,7 +100,7 @@ const stop_listen= () => {
   )
 }
 
-const Dictaphone = () => {
+const Dictaphone = (props) => {
     const { transcript , resetTranscript } =  useSpeechRecognition()
     const [start ,setstart] = useState(0);
     const [end ,setend] = useState(0);
@@ -143,7 +143,7 @@ const Dictaphone = () => {
         <button onClick={reset_cumulate}>reset_cumulate</button>
         <p>{transcript}</p>
         <div>cumulate</div>
-        <div>{cumulate/1000} sec</div>
+        <div>{props.Name} already spoke {cumulate/1000} sec</div>
         
       </div>
     )

@@ -1,12 +1,33 @@
 import React , {Component} from 'react';
 import { Grid, Button } from 'semantic-ui-react';
-
+import { storage } from "../firebase";
 class FunctionHelper extends Component {
-    state = {
-        de : true,
-        group: false,
-        queue: false,
-        qa: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            de : true,
+            group: false,
+            queue: false,
+            qa: false,
+            array : [],
+            processedUserList: [],
+            qqaamode:true
+        }
+    }
+
+
+    getuserlist=()=>{
+        console.log(this.props.userlist)
+        if(this.props.userlist == null || this.props.userlist == undefined ){
+            alert("Please retry again ")
+        }
+        else{
+            //對userlist做處理
+            let temp = this.props.userlist
+            console.log(temp);
+            this.setState({processedUserList: temp});
+            this.forceUpdate();
+        }
     }
     
     handleGroup = () => {
@@ -17,6 +38,14 @@ class FunctionHelper extends Component {
     }
     handleQA = () => {
         this.setState({de:false, group: false, queue: false, qa: true})
+        if(this.state.qqaamode){//foreign
+            //f to a
+            this.setState({qqaamode : false})
+        }
+        else{
+            //a to f
+            this.setState({qqaamode : true})
+        }
     }
     handleCS = () => {
         this.setState({de:false, group: false, queue: false, qa: false})
@@ -51,10 +80,15 @@ class FunctionHelper extends Component {
                             Choose speaking
                         </Button>
                     </Grid.Row>
+                    <Grid.Row centered>
+                        <Button onClick={this.getuserlist}>
+                            get user
+                        </Button>
+                    </Grid.Row>
                 </Grid>) : 
                 this.state.group ? <Group handler={this.handleBack} /> : 
-                this.state.queue ? <Queue handler={this.handleBack} /> :
-                this.state.qa ? <QA handler={this.handleBack} /> : <ChooseSpeaker handler={this.handleBack} />
+                this.state.queue ? <Queue handler={this.handleBack} userlist={this.state.processedUserList}/> :
+                this.state.qa ? <QA handler={this.handleBack}  mode={this.state.qqaamode}/> : <ChooseSpeaker handler={this.handleBack} />
 
             
         )
@@ -74,20 +108,47 @@ class Group extends Component {
 }
 
 class Queue extends Component {
+    
     render(){
-        return (<Button icon="angle left" onClick={this.props.handler} />);
+        return (
+            <>
+            
+            <Button icon="angle left" onClick={this.props.handler} />
+            <br/>
+            <br/>
+            {this.props.userlist.map((user)=>
+                <Button>{user.displayName}</Button>
+            )}
+            </>
+            );
     }
 }
 
 class ChooseSpeaker extends Component {
     render(){
-        return (<Button icon="angle left" onClick={this.props.handler} />);
+        return (
+            <>
+        <Button icon="angle left" onClick={this.props.handler} />
+            <br/>
+            <br/>
+            {this.props.userlist.map((user)=>
+                <Button>{user.displayName}</Button>
+            )}
+            </>
+        );
     }
 }
 
 class QA extends Component {
     render(){
-        return (<Button icon="angle left" onClick={this.props.handler} />);
+        return (
+        <>
+        <Button icon="angle left" onClick={this.props.handler} />
+        <br/>
+        <br/>
+        {(!this.props.mode)?<div>this is Asian Mode</div>:<div>this is Foreign Mode</div>}
+        </>
+        );
     }
 }
 

@@ -5,11 +5,11 @@ import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
 import Dictaphone from './Speech';
-const YOYO = () => {
+const YOYO = (props) => {
  
 
   const [displayName, setDisplayName] = useState('')
-  const [roomName, setRoomName] = useState('')
+  // const [roomName, setRoomName] = useState('')
   const [sendmessage, setSendMessage] = useState('')
   const [receivemessage = '', setreceiveMessage] = useState('')
   const [password, setPassword] = useState('')
@@ -30,8 +30,10 @@ const YOYO = () => {
     storage.ref(`screenShot/${image.name}`).put(image);
   }
   const showuser = async() => {
-    setuserlist(await api.getParticipantsInfo());
-    console.log(userlist);
+    let temp = await api.getParticipantsInfo()
+    setuserlist(temp);
+    console.log(temp);
+    props.test(temp)
   }
 
   const getdevice = async() => {
@@ -75,10 +77,10 @@ const YOYO = () => {
     ? (
       <>
       <Jitsi
-        roomName={roomName}
+        roomName={props.roomName}
         displayName={displayName}
         password={password}
-        containerStyle={{ width: '400px', height: '300px' }}
+        containerStyle={{ width: props.width, height: '600px' }}
         frameStyle={{display:true}}
         onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI)}}
       />
@@ -86,7 +88,7 @@ const YOYO = () => {
       <button onClick={getdevice}>getdevice</button>
       <input type='text' placeholder='Send Message!' value={sendmessage} onChange={e => setSendMessage(e.target.value)} />
       <button onClick={screenshot}>ENTER</button>
-      <Dictaphone />
+      <Dictaphone Name = {displayName}/>
       {/* <img  src={receivemessage} width='400px' height='300px'/> */}
       
       </>
@@ -94,7 +96,6 @@ const YOYO = () => {
     : (
       <>
         <h1>Crate a Meeting</h1>
-        <input type='text' placeholder='Room name' value={roomName} onChange={e => setRoomName(e.target.value)} />
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
         <button onClick={() => setOnCall(true)}> Let&apos;s start!</button>
         
