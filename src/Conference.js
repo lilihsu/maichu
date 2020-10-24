@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
 import Jitsi from 'react-jitsi'
-<<<<<<< HEAD
-import VideoConference from './VideoConference'
-=======
->>>>>>> ui
  
 const Conference = (props) => {
   const [displayName, setDisplayName] = useState('')
@@ -37,17 +33,10 @@ const Conference = (props) => {
       )
     : (
       <>
-<<<<<<< HEAD
-        <h1>Crate a Meeting</h1>
-        <input type='text' placeholder='Room name' value={roomName} onChange={e => setRoomName(e.target.value)} />
-        <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
-        <button onClick={() => setOnCall(true)}> Let&apos;s start!</button>
-=======
         <h1>Create a Meeting</h1>
         <input type='text' placeholder='Room name' value={roomName} onChange={e => setRoomName(e.target.value)} />
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
         <button onClick={() => setOnCall(true)}> Let's start!</button>
->>>>>>> ui
       </>
     )
  
