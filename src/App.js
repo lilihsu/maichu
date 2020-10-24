@@ -1,13 +1,20 @@
 import 'semantic-ui-css/semantic.min.css'
 import React , {Component} from 'react';
-import Layout from './components/Layout';
 import { Route } from 'react-router-dom';
 import Administrator from './pages/Administrator';
 import Participant  from './pages/Participant';
-
-
+//import VideoConference from './VideoConference';
+import { storage } from "./firebase";
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+  uploadImage=(image)=>{
+    storage.child('screenShot').delete();
+    storage.ref(`screenShot/${image.name}`).put(image);
+  }
+    
   render() {
     return (
       <div className="container">
@@ -15,6 +22,7 @@ class App extends Component {
         <Route path="/" exact component={Administrator} />
         <Route path="/admin" component={Administrator} />
         <Route path="/participant" component={Participant} />
+        {/* <Route path="/speech" component={Speech} /> */}
       </div>
     );
   }
