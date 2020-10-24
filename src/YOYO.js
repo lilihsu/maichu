@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Jitsi from 'react-jitsi'
-import { storage } from "./firebase";
+import { database, storage } from "./firebase";
 import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
@@ -26,7 +26,8 @@ const YOYO = (props) => {
   // }, 500);
   const uploadImage = (image)=>{
     //storage.child('screenShot').delete();
-    storage.ref(`screenShot/${image.name}`).put(image);
+    let time=new Date().getTime();
+    storage.ref(`screenShot/${time}`).put(image);
   }
   const showuser = async() => {
     setuserlist(await api.getParticipantsInfo());
