@@ -6,8 +6,21 @@ import Administrator from './Administrator';
 import Participant  from './Participant';
 import Speech from './Speech';
 
+import {Grid} from 'semantic-ui-react';
+import './VideoConference';
+//import VideoConference from './VideoConference';
+import Conference from './Conference';
+import { storage } from "./firebase";
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+  uploadImage=(image)=>{
+    storage.child('screenShot').delete();
+    storage.ref(`screenShot/${image.name}`).put(image);
+  }
+    
   render() {
     return (
       <div className="container">
