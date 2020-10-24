@@ -6,12 +6,18 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "base64-img": "^1.0.4",
+    "dataurl-to-blob": "0.0.1",
+    "firebase": "^7.24.0",
+    "fs-extra": "^9.0.1",
+    "image-data-uri": "^2.0.1",
     "next": "^9.5.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-jitsi": "^1.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-speech-recognition": "^3.2.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.0",
     "web-vitals": "^0.2.4"
@@ -30,7 +36,7 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
+      "0.2%",
       "not dead",
       "not op_mini all"
     ],
