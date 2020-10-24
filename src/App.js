@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import {Grid} from 'semantic-ui-react';
 import './VideoConference';
 import VideoConference from './VideoConference';
+import Conference from './Conference';
 
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
         <Grid celled>
           <Grid.Row>
             <Grid.Column width={13}>
-              <VideoConference width={13}/>
+              <Conference inline-block />
             </Grid.Column>
             <Grid.Column width={3}>
               <h4>Function bar</h4>
