@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import Jitsi from 'react-jitsi'
 import { database, storage } from "./firebase";
 import imageDataURI from 'image-data-uri';
@@ -18,12 +18,20 @@ const YOYO = (props) => {
   const [api,setapi] = useState('');
   const [flag = false ,setflag] = useState('');
   const [picArray,setpicArray] = useState([]);
-
+  const [chsnName,setChsnName]=useState('');
   // setTimeout(() => {
   //   if(flag){
   //     screenshot();
   //   }
   // }, 500);
+
+  useEffect(()=>{
+    database.ref('candidate').on('value',e=>{
+      setChsnName(e.val().id);
+      console.log(e.val())
+    });
+  })
+
   const uploadImage = (image)=>{
     //storage.child('screenShot').delete();
     let time=new Date().getTime();
