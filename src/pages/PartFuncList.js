@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import { Grid, Button } from 'semantic-ui-react';
+import {database} from "../firebase/";
 
 class FunctionHelper extends Component {
     state = {
@@ -15,6 +16,12 @@ class FunctionHelper extends Component {
     }
     handleBack = (e) => {
         this.setState({de:true, group: false})
+    }
+    chooseSpeaker=(name)=>{
+        database.ref('candidate').set({id:name})
+      }
+    clearSpeaker=()=>{
+        database.ref('candidate').set({id:''})
     }
     render() {
         
