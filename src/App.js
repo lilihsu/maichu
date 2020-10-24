@@ -4,18 +4,10 @@ import { Route } from 'react-router-dom';
 import Administrator from './pages/Administrator';
 import Participant  from './pages/Participant';
 //import VideoConference from './VideoConference';
-import { storage } from "./firebase";
 
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
-  uploadImage=(image)=>{
-    storage.child('screenShot').delete();
-    storage.ref(`screenShot/${image.name}`).put(image);
-  }
-    
   render() {
+    
     return (
       <div className="container">
         {/* The corresponding component will show here if the current URL matches the path */}

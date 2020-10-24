@@ -18,7 +18,6 @@ const YOYO = () => {
   const [api,setapi] = useState('');
   const [flag = false ,setflag] = useState('');
   const [picArray,setpicArray] = useState([]);
-  const [emotion,setEmotion] = useState(null);
 
   // setTimeout(() => {
   //   if(flag){
