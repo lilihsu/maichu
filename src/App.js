@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import { Route } from 'react-router-dom';
 import Administrator from './Administrator';
 import Participant  from './Participant';
-
+import Speech from './Speech';
 
 
 class App extends Component {
@@ -15,6 +15,7 @@ class App extends Component {
         <Route path="/" exact component={Administrator} />
         <Route path="/admin" component={Administrator} />
         <Route path="/participant" component={Participant} />
+        <Route path="/speech" component={Speech} />
       </div>
     );
   }
