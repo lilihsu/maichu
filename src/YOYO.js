@@ -36,9 +36,9 @@ const YOYO = () => {
     await api.resizeLargeVideo('400px', '300px');
     await api.captureLargeVideoScreenshot().then(dataURL => {
       // console.log(dataURL);
-      // console.log(receivemessage);
+      // 
       setreceiveMessage(dataURL.dataURL);
-      
+      console.log(receivemessage);
       //setpicArray(dataURL.dataURL)
       //console.log(picArray[0]);
       setflag(true);
