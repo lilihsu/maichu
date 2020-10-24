@@ -2,8 +2,8 @@ import 'semantic-ui-css/semantic.min.css'
 import React , {Component} from 'react';
 import Layout from './components/Layout';
 import { Route } from 'react-router-dom';
-import Administrator from './Administrator';
-import Participant  from './Participant';
+import Administrator from './pages/Administrator';
+import Participant  from './pages/Participant';
 
 
 

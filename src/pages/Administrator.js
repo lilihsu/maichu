@@ -1,8 +1,8 @@
-import 'semantic-ui-css/semantic.min.css'
 import React , {Component} from 'react';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 import {Header, Grid} from 'semantic-ui-react';
-import Conference from './Conference';
+import Conference from '../Conference';
+import AdminFuncHelper from './AdminFuncList';
 
 
 class Administrator extends Component {
@@ -19,7 +19,7 @@ class Administrator extends Component {
                 <Conference inline-block />
               </Grid.Column>
               <Grid.Column width={3}>
-                <h4>Function bar</h4>
+                <AdminFuncHelper />
               </Grid.Column>
             </Grid.Row>
           </Grid>

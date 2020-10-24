@@ -1,8 +1,8 @@
-import 'semantic-ui-css/semantic.min.css'
 import React , {Component} from 'react';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 import {Header, Grid} from 'semantic-ui-react';
-import Conference from './Conference';
+import Conference from '../Conference';
+import PartFuncHelper from './PartFuncList';
 
 
 class Participant extends Component {
@@ -20,7 +20,7 @@ class Participant extends Component {
             <Conference inline-block />
             </Grid.Column>
             <Grid.Column width={3}>
-            <h4>Function bar</h4>
+            <PartFuncHelper />
             </Grid.Column>
         </Grid.Row>
         </Grid>
