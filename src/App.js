@@ -24,14 +24,14 @@ class App extends Component {
     
   }
   enqueue=(name)=>{
-    database.ref('queue').push(name)
+    //database.ref('queue').push(name)
   }
   dequeue=async ()=>{
     let id
     // await database.ref('/queue').once('value').then(e=>{
     //   id=e.val().id})
     // this.setState({id:id})
-    await database.ref('/queue').delete()
+   // await database.ref('/queue').delete()
   }
   setGroupCount=async(gName,op)=>{
     let num;
@@ -47,7 +47,7 @@ class App extends Component {
     
   }
   componentDidMount(){
-    this.dequeue();
+    //this.dequeue();
     //this.enqueue('fuck');
     database.ref('group1').on('value',e=>{
       this.setState({group1:e.val().num});
