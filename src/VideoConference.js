@@ -29,8 +29,7 @@ const VideoConference = () => {
 
     const _jitsi = new window.JitsiMeetExternalAPI("meet.jit.si/", {
         roomName: 'JitsiMeetAPIExample',
-    width: 500,
-    height: 300,
+    width: 880,
       parentNode: document.getElementById(jitsiContainerId),
     });
 

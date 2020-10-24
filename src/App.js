@@ -1,13 +1,27 @@
 import 'semantic-ui-css/semantic.min.css'
 import React , {Component} from 'react';
 import Layout from './components/Layout';
+import {Grid} from 'semantic-ui-react';
+import './VideoConference';
+import VideoConference from './VideoConference';
 
 
 class App extends Component {
   render() {
     return (
       <Layout>
-        <h3>something</h3>
+        <script src='https://meet.jit.si/external_api.js'></script>
+        <Grid celled>
+          <Grid.Row>
+            <Grid.Column width={13}>
+              <VideoConference width={13}/>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <h4>Function bar</h4>
+            </Grid.Column>
+          </Grid.Row>
+
+        </Grid>
       </Layout>
     );
   }

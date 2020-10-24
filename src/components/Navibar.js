@@ -7,7 +7,7 @@ class Navibar extends Component {
   return (
     <Menu style={{ marginTop: '10px' }}>
       <Menu.Item position="left">
-        Academic Credential
+        EduStream
       </Menu.Item>
 
       <Menu.Item position="right">
