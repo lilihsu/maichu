@@ -5,7 +5,7 @@ import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
 import Dictaphone from './Speech';
-const YOYO = () => {
+const YOYO = (props) => {
  
 
   const [displayName, setDisplayName] = useState('')
@@ -77,7 +77,7 @@ const YOYO = () => {
         roomName={roomName}
         displayName={displayName}
         password={password}
-        containerStyle={{ width: '400px', height: '300px' }}
+        containerStyle={{ width: props.width, height: '600px' }}
         frameStyle={{display:true}}
         onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI)}}
       />

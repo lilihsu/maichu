@@ -57,6 +57,11 @@ class FunctionHelper extends Component {
                             Choose speaking
                         </Button>
                     </Grid.Row>
+                    <Grid.Row centered>
+                        <Button onClick={this.handleEmotion}>
+                            Check Student Emotion
+                        </Button>
+                    </Grid.Row>
                 </Grid>) : 
                 this.state.group ? <Group handler={this.handleBack} /> : 
                 this.state.queue ? <Queue handler={this.handleBack} /> :
@@ -121,7 +126,7 @@ class EmotionDetect extends Component {
                 </Form.Field>
                 <Button type="submit">Check</Button>
             </Form>
-            <Message visible={!!this.props.emotion}>
+            <Message visible={this.state.show}>
                 <Message.Header>{this.props.emotion}</Message.Header>
             </Message>
             </>
