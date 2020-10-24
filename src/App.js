@@ -23,16 +23,29 @@ class App extends Component {
     }
     
   }
-  enqueue=(name)=>{
-    database.ref('queue').push(name)
+
+  addSpeakTime=async(name,time)=>{
+    let preTime=0;
+    await database.ref('speakTime/'+name).once('value').then(e=>{
+      if(e.exists())
+        preTime=e.val().time;
+    })
+    await database.ref('speakTime/'+name).set({time:preTime+time})
+
   }
-  dequeue=async ()=>{
-    let id
-    // await database.ref('/queue').once('value').then(e=>{
-    //   id=e.val().id})
-    // this.setState({id:id})
-    await database.ref('/queue').delete()
+  getSpeakTime=async()=>{
+    let result=[]
+    await database.ref('speakTime/').orderByValue().once('value').then(es=>{
+      if(es.exists()){
+        es.forEach(e=>{
+          result.push({name:e.key,time:e.val().time})
+        })
+      }
+    })
+    console.log(result)
+    return result
   }
+
   setGroupCount=async(gName,op)=>{
     let num;
     await database.ref(gName).once('value').then(e=>{
@@ -47,7 +60,7 @@ class App extends Component {
     
   }
   componentDidMount(){
-    this.dequeue();
+    //this.dequeue();
     //this.enqueue('fuck');
     database.ref('group1').on('value',e=>{
       this.setState({group1:e.val().num});
