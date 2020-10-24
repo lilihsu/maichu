@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Jitsi from 'react-jitsi'
 import { storage } from "./firebase";
 import imageDataURI from 'image-data-uri';
+import base64Img from 'base64-img';
+import dataURLtoBlob from 'dataurl-to-blob';
 const YOYO = () => {
  
 
@@ -38,22 +40,28 @@ const YOYO = () => {
     setflag(false);
     setreceiveMessage('');
     await api.resizeLargeVideo('400px', '300px');
-    await api.captureLargeVideoScreenshot().then(dataURL => {
-      // console.log(dataURL);
+    await api.captureLargeVideoScreenshot().then(async dataURL => {
+      //console.log(dataURL.dataURL.split(',')[1]);
       // // 
-      // uploadImage(dataURL);
+      
       setreceiveMessage(dataURL.dataURL);
       // Some image data uri
+      let a =await  dataURLtoBlob(dataURL.dataURL);
+      let b = new Date().getTime();//何政儒要的時間戳記
+      console.log(b);
+        uploadImage(a);//uploadImage(a,b);
       
-      
+      console.log(a);
+      // base64Img.img(dataURL.dataURL, 'dest', '1', function(err, filepath) {
+      //   console.log(filepath);
+      // });
       // It will create the full path in case it doesn't exist
       // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
       // let filePath = './out/path/filename';
       
-      // // Returns a Promise
-      // imageDataURI.outputFile(dataURL.dataURL, filePath)
-      // .then(res => console.log(res))
-       console.log(receivemessage);
+      // // // // Returns a Promise
+      // imageDataURI.outputFile(dataURL.dataURL, filePath).then(res => console.log(res))
+      //  console.log(receivemessage);
       //setpicArray(dataURL.dataURL)
       //console.log(picArray[0]);
       setflag(true);
