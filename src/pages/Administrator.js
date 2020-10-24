@@ -33,7 +33,7 @@ class Administrator extends Component {
                 <YOYO inline-block />
               </Grid.Column>
               <Grid.Column width={3}>
-                <AdminFuncHelper />
+                <AdminFuncHelper emotion={this.state.emotion} />
               </Grid.Column>
             </Grid.Row>
           </Grid>

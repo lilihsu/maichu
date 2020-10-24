@@ -1,28 +1,34 @@
 import React , {Component} from 'react';
-import { Grid, Button } from 'semantic-ui-react';
+import { Message, Input, Form, Grid, Button } from 'semantic-ui-react';
 
 class FunctionHelper extends Component {
     state = {
         de : true,
         group: false,
         queue: false,
-        qa: false
+        qa: false,
+        cs: false
+
     }
+    constructor(props) {super(props)}
     
     handleGroup = () => {
-        this.setState({de:false, group: true, queue: false, qa: false })
+        this.setState({de:false, group: true, queue: false, qa: false ,cs: false})
     }
     handleQueue = () => {
-        this.setState({de:false, group: false, queue: true, qa: false })
+        this.setState({de:false, group: false, queue: true, qa: false ,cs: false})
     }
     handleQA = () => {
-        this.setState({de:false, group: false, queue: false, qa: true})
+        this.setState({de:false, group: false, queue: false, qa: true,cs: false})
     }
     handleCS = () => {
-        this.setState({de:false, group: false, queue: false, qa: false})
+        this.setState({de:false, group: false, queue: false, qa: false,cs: true})
+    }
+    handleEmotion = () => {
+        this.setState({de:false, group: false, queue: false, qa: false,cs: false})
     }
     handleBack = (e) => {
-        this.setState({de:true, group: false})
+        this.setState({de:true, group: false, queue:false, qa:false,cs: false})
     }
     render() {
         
@@ -54,7 +60,11 @@ class FunctionHelper extends Component {
                 </Grid>) : 
                 this.state.group ? <Group handler={this.handleBack} /> : 
                 this.state.queue ? <Queue handler={this.handleBack} /> :
-                this.state.qa ? <QA handler={this.handleBack} /> : <ChooseSpeaker handler={this.handleBack} />
+                this.state.qa ? <QA handler={this.handleBack} /> : 
+                this.state.cs ? <ChooseSpeaker handler={this.handleBack} /> : 
+                <EmotionDetect handler={this.handleBack} 
+                    emotion={this.props.emotion}
+                />
 
             
         )
@@ -88,6 +98,34 @@ class ChooseSpeaker extends Component {
 class QA extends Component {
     render(){
         return (<Button icon="angle left" onClick={this.props.handler} />);
+    }
+}
+
+class EmotionDetect extends Component {
+    state={
+        id: "",
+        show: false
+    }
+    constructor(props){super(props)}
+    handleSubmit = () => {
+        this.setState({show: true})
+    }
+    render(){
+        return(
+            <>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Field>
+                    <Input placeholder="Student ID"
+                        onChange={event=>this.setState({id:event.target.value})}
+                    />
+                </Form.Field>
+                <Button type="submit">Check</Button>
+            </Form>
+            <Message visible={!!this.props.emotion}>
+                <Message.Header>{this.props.emotion}</Message.Header>
+            </Message>
+            </>
+        )
     }
 }
 
