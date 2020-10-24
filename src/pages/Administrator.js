@@ -12,6 +12,7 @@ class Administrator extends Component {
       emotion:null
     }
   }
+
   componentDidMount(){
     database.ref('CUR_EMOTION').on('value',e=>{
       this.setState({emotion:e.val()});
