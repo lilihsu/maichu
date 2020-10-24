@@ -5,7 +5,7 @@ import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
 import Dictaphone from './Speech';
-const YOYO = () => {
+const YOYO = (props) => {
  
 
   const [displayName, setDisplayName] = useState('')
@@ -34,7 +34,7 @@ const YOYO = () => {
   }
 
   const getdevice = async() => {
-    console.log(await api.getCurrentDevices());
+    await api.getCurrentDevices();
   }
 
   const screenshot = async()=>{
@@ -77,15 +77,14 @@ const YOYO = () => {
         roomName={roomName}
         displayName={displayName}
         password={password}
-        containerStyle={{ width: '400px', height: '300px' }}
+        containerStyle={{ width: props.width, height: '600px' }}
         frameStyle={{display:true}}
         onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI)}}
       />
       <button onClick={showuser}>press</button>
       <button onClick={getdevice}>getdevice</button>
-      <input type='text' placeholder='Send Message!' value={sendmessage} onChange={e => setSendMessage(e.target.value)} />
       <button onClick={screenshot}>ENTER</button>
-      <Dictaphone />
+      <Dictaphone Name={displayName}/>
       {/* <img  src={receivemessage} width='400px' height='300px'/> */}
       
       </>
