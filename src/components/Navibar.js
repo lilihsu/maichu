@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 
 class Navibar extends Component {
@@ -11,7 +12,14 @@ class Navibar extends Component {
       </Menu.Item>
 
       <Menu.Item position="right">
-        Go to Other Services
+        <Link to="/admin">
+          Administrator
+        </Link>
+      </Menu.Item>
+      <Menu.Item position="right">
+        <Link to="participant">
+          Participant
+        </Link>
       </Menu.Item>
     </Menu>
   )
