@@ -7,7 +7,6 @@ import dataURLtoBlob from 'dataurl-to-blob';
 import Dictaphone from './Speech';
 const YOYO = (props) => {
  
-
   const [displayName, setDisplayName] = useState('')
   // const [roomName, setRoomName] = useState('')
   const [sendmessage, setSendMessage] = useState('')
@@ -90,7 +89,11 @@ const YOYO = (props) => {
         password={password}
         containerStyle={{ width: props.width, height: '600px' }}
         frameStyle={{display:true}}
-        onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI)}}
+        onAPILoad={JitsiMeetAPI => {
+          setapi(JitsiMeetAPI)
+          showuser()
+          props.setGroupCount(props.roomName,userlist.length)
+        }}
       />
       <button onClick={showuser}>press</button>
       <button onClick={getdevice}>getdevice</button>

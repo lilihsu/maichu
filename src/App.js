@@ -33,17 +33,15 @@ class App extends Component {
     // this.setState({id:id})
    // await database.ref('/queue').delete()
   }
-  setGroupCount=async(gName,op)=>{
+  setGroupCount=async(gName,val)=>{
     let num;
+    if(gName==="LogiGroup") gName="logiGroup";
+    else if(gName==="LogiSubGroup1")  gName="group1";
+    else if(gName==="LogiSubGroup2")  gName="group2";
     await database.ref(gName).once('value').then(e=>{
       num=e.val().num;
     })
-    if(op==='-'){
-      await database.ref(gName).set({num:num-1})
-    }
-    else{
-      await database.ref(gName).set({num:num+1})
-    }
+    await database.ref(gName).set({num:val})
     
   }
   componentDidMount(){
@@ -70,19 +68,25 @@ class App extends Component {
                 <Administrator 
                   group1={this.state.group1} 
                   group2={this.state.group2} 
-                  logiGroup={this.state.logiGroup}/>
+                  logiGroup={this.state.logiGroup}
+                  setGroupCount={this.setGroupCount}
+                  />
               </Route>
               <Route path="/admin">
                 <Administrator 
                   group1={this.state.group1} 
                   group2={this.state.group2} 
-                  logiGroup={this.state.logiGroup}/>
+                  logiGroup={this.state.logiGroup}
+                  setGroupCount={this.setGroupCount}
+                  />
               </Route>
               <Route path="/participant">
                 <Participant  
                   group1={this.state.group1} 
                   group2={this.state.group2} 
-                  logiGroup={this.state.logiGroup}/>
+                  logiGroup={this.state.logiGroup}
+                  setGroupCount={this.setGroupCount}
+                  />
               </Route>
             </Switch>
           </Router>

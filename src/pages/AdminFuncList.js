@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import { Grid, Button,Form,Message,Input } from 'semantic-ui-react';
+import { Header, Grid, Button,Form,Message,Input } from 'semantic-ui-react';
 import { storage } from "../firebase";
 class FunctionHelper extends Component {
     constructor(props) {
@@ -92,7 +92,11 @@ class FunctionHelper extends Component {
                         </Button>
                     </Grid.Row>
                 </Grid>) : 
-                this.state.group ? <Group handler={this.handleBack} /> : 
+                this.state.group ? <Group handler={this.handleBack} 
+                    group1={this.props.group1}
+                    group2={this.props.group2}
+                    changeRoom={this.props.changeRoom}
+                /> : 
                 this.state.queue ? <Queue handler={this.handleBack} userlist={this.state.processedUserList}/> :
                 this.state.qa ? <QA handler={this.handleBack}  mode={this.state.qqaamode}/> : 
                  
@@ -114,6 +118,15 @@ class Group extends Component {
     render(){
         return <div>
             <Button icon="angle left" onClick={this.props.handler} />
+            <br />
+            <br />
+            <Header as="h3">Group 1</Header>
+            <br />
+            <Button primary onClick={()=>this.props.changeRoom(1)}>{"Cur: "+this.props.group1 + " Add"}</Button>
+            <Header as="h3">Group 2</Header>
+            <br />
+            <Button primary onClick={()=>this.props.changeRoom(2)}>{"Cur: "+this.props.group2 + " Add"}</Button>
+
         </div>
     }
 }
