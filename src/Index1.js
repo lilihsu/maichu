@@ -5,6 +5,26 @@ import React, { Component } from 'react';
 //import config from '../../components/config';
 //
 
+const loadJitsiScript = async  () => {
+  let resolveLoadJitsiScriptPromise = null;
+
+  const loadJitsiScriptPromise = new Promise((resolve) => {
+    resolveLoadJitsiScriptPromise = resolve;
+  });
+
+  const script = document.createElement("script");
+  script.src = "https://meet.jit.si/external_api.js";
+  script.async = true;
+  script.onload = resolveLoadJitsiScriptPromise
+  document.body.appendChild(script);
+
+  return loadJitsiScriptPromise;
+};
+const initialiseJitsi = async () => {
+  if (!window.JitsiMeetExternalAPI) {
+    await loadJitsiScript();
+  }
+}
 class Index1 extends Component {
     constructor(props) {
       super(props);
@@ -12,8 +32,11 @@ class Index1 extends Component {
         vm:null,
         userlist:[]
     };
+    this.init = this.init.bind(this);
+    initialiseJitsi();
+    this.init();
   }
-  componentDidMount() {
+  async init() {
     let vm =  new window.JitsiMeetExternalAPI("meet.jit.si/", {
       roomName: 'JitsiMeetAPIExample',
       width: 500,
