@@ -28,7 +28,7 @@ class App extends Component {
         <Route path="/" exact component={Administrator} />
         <Route path="/admin" component={Administrator} />
         <Route path="/participant" component={Participant} />
-        <Route path="/speech" component={Speech} />
+        {/* <Route path="/speech" component={Speech} /> */}
       </div>
     );
   }

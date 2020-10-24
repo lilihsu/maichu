@@ -3,6 +3,7 @@ import React , {Component} from 'react';
 import Layout from './components/Layout';
 import {Header, Grid} from 'semantic-ui-react';
 import Conference from './Conference';
+import YOYO from './YOYO';
 
 
 class Administrator extends Component {
@@ -16,7 +17,8 @@ class Administrator extends Component {
           <Grid celled>
             <Grid.Row>
               <Grid.Column width={13}>
-                <Conference inline-block />
+                {/* <Conference inline-block /> */}
+                <YOYO inline-block />
               </Grid.Column>
               <Grid.Column width={3}>
                 <h4>Function bar</h4>

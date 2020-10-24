@@ -4,6 +4,7 @@ import { storage } from "./firebase";
 import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
+import Dictaphone from './Speech';
 const YOYO = () => {
  
 
@@ -84,8 +85,8 @@ const YOYO = () => {
       <button onClick={getdevice}>getdevice</button>
       <input type='text' placeholder='Send Message!' value={sendmessage} onChange={e => setSendMessage(e.target.value)} />
       <button onClick={screenshot}>ENTER</button>
-      
-      <img  src={receivemessage} width='400px' height='300px'/>
+      <Dictaphone />
+      {/* <img  src={receivemessage} width='400px' height='300px'/> */}
       
       </>
       )
@@ -95,6 +96,7 @@ const YOYO = () => {
         <input type='text' placeholder='Room name' value={roomName} onChange={e => setRoomName(e.target.value)} />
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
         <button onClick={() => setOnCall(true)}> Let&apos;s start!</button>
+        
       </>
     )
  
