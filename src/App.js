@@ -3,11 +3,25 @@ import React , {Component} from 'react';
 import Layout from './components/Layout';
 import {Grid} from 'semantic-ui-react';
 import './VideoConference';
-import VideoConference from './VideoConference';
+//import VideoConference from './VideoConference';
 import Conference from './Conference';
-
+import { storage } from "./firebase";
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+  UploadButton=e=>{
+    if(e.target.files[0]){
+      this.setState({image:e.target.files[0]});
+    }
+  }
+
+  uploadImage=(image)=>{
+    storage.child('screenShot').delete();
+    storage.ref(`screenShot/${image.name}`).put(image);
+  }
+    
   render() {
     return (
       <Layout>
@@ -21,7 +35,6 @@ class App extends Component {
               <h4>Function bar</h4>
             </Grid.Column>
           </Grid.Row>
-
         </Grid>
       </Layout>
     );
