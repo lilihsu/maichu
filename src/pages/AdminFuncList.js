@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, Button,Form,Message,Input } from 'semantic-ui-react';
 import { storage } from "../firebase";
 class FunctionHelper extends Component {
     constructor(props) {
@@ -29,7 +29,6 @@ class FunctionHelper extends Component {
             this.forceUpdate();
         }
     }
-    constructor(props) {super(props)}
     
     handleGroup = () => {
         this.setState({de:false, group: true, queue: false, qa: false ,cs: false})

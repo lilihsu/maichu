@@ -23,7 +23,7 @@ class Administrator extends Component {
   }
   componentDidMount(){
     database.ref('CUR_EMOTION').on('value',e=>{
-      this.setState({emotion:e.val()});
+      this.setState({emotion:e.val().cur_emotion});
       console.log(e.val())
     });
   }
