@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideoConference = (roomName) => {
+const VideoConference = () => {
   
   const jitsiContainerId = "jitsi-container-id";
 
@@ -28,22 +28,14 @@ const VideoConference = (roomName) => {
     }
 
     const _jitsi = new window.JitsiMeetExternalAPI("meet.jit.si/", {
-        roomName: roomName,
-    width: 500,
-    height: 300,
+        roomName: 'JitsiMeetAPIExample',
+    width: 880,
       parentNode: document.getElementById(jitsiContainerId),
     });
 
     setJitsi(_jitsi)
   };
 
-const showuser = async() => {
-    console.log(jitsi._participants);
-}
-
-const getdevice = async() => {
-  jitsi.getCurrentDevices();
-}
   React.useEffect(() => {
     initialiseJitsi();
 
@@ -53,9 +45,7 @@ const getdevice = async() => {
   return (
       <>
         <div id={jitsiContainerId} style={{ height: 500, width: 300 }} />
-        {console.log(jitsi)}
-        <button onClick={showuser}>press</button>
-        <button onClick={getdevice}>getdevice</button>
+        
       </>);
 };
 

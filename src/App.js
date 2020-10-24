@@ -1,50 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import Index1 from './Index1';
-import React, { Component } from 'react';
-import VideoConference from './VideoConference'
-import YOYO from './YOYO'
-const loadJitsiScript = async  () => {
-  let resolveLoadJitsiScriptPromise = null;
+import 'semantic-ui-css/semantic.min.css'
+import React , {Component} from 'react';
+import Layout from './components/Layout';
+import { Route } from 'react-router-dom';
+import Administrator from './Administrator';
+import Participant  from './Participant';
 
-  const loadJitsiScriptPromise = new Promise((resolve) => {
-    resolveLoadJitsiScriptPromise = resolve;
-  });
 
-  const script = document.createElement("script");
-  script.src = "https://meet.jit.si/external_api.js";
-  script.async = true;
-  script.onload = resolveLoadJitsiScriptPromise
-  document.body.appendChild(script);
 
-  return loadJitsiScriptPromise;
-};
-
-const initialiseJitsi = async () => {
-  if (!window.JitsiMeetExternalAPI) {
-    await loadJitsiScript();
-  }
-}
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state ={
-      vm:null,
-      userlist:[]
-  };
-  initialiseJitsi();
-}
-  
-  render (){
-  return (
-    <div className="App">
-      <script src='https://meet.jit.si/external_api.js'></script>
-      <header className="App-header">
-        <YOYO/>
-        <div id='react-jitsi-frame' ></div>
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <div className="container">
+        {/* The corresponding component will show here if the current URL matches the path */}
+        <Route path="/" exact component={Administrator} />
+        <Route path="/admin" component={Administrator} />
+        <Route path="/participant" component={Participant} />
+      </div>
+    );
   }
 }
 
