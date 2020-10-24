@@ -1,22 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import Index1 from './Index1';
+
+import VideoConference from './VideoConference'
+
 
 function App() {
   return (
     <div className="App">
+      <script src='https://meet.jit.si/external_api.js'></script>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <VideoConference></VideoConference>
       </header>
     </div>
   );
