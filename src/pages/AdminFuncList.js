@@ -65,28 +65,22 @@ class FunctionHelper extends Component {
         return(
             this.state.de ? 
                 (<Grid>
-                    <Grid.Row columns="two" divided>
-                        <Grid.Column>
-                            <Button primary onClick={this.handleGroup} >
-                                Group
-                            </Button>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Button primary onClick={this.handleQueue} >
-                                Queue
-                            </Button>
-                        </Grid.Column>
+                    <Grid.Row centered>
+                        <Button primary onClick={this.handleQueue} >
+                            Queue
+                        </Button>
                     </Grid.Row>
                     <Grid.Row centered>
                         <Button onClick={this.handleQA} >
                             Q/A Mode
                         </Button>
                     </Grid.Row>
-                    
                     <Grid.Row centered>
-                        <Button onClick={this.getuserlist}>
+                    <Button onClick={this.getuserlist}>
                             get user
                         </Button>
+                    </Grid.Row>
+                    <Grid.Row centered>
                         <Button onClick={this.handleEmotion}>
                             Check Student Emotion
                         </Button>

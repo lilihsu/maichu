@@ -5,6 +5,7 @@ import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
 import Dictaphone from './Speech';
+import { Button, Grid } from 'semantic-ui-react';
 import { pink } from 'color-name';
 const YOYO = (props) => {
  
@@ -112,10 +113,15 @@ const YOYO = (props) => {
         frameStyle={{display:true}}
         onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI);setflag(true);if(chsnName == displayName){pin()}}}
       />
-      <button onClick={showuser}>press</button>
-      <button onClick={getdevice}>getdevice</button>
-      <button onClick={screenshot}>ENTER</button>
-      {/* <button onClick={pin}>PIN</button> */}
+      <br />
+          <Button secondary onClick={showuser}>press</Button>
+          <Button secondary onClick={getdevice}>getdevice</Button>
+          <Button secondary onClick={screenshot}>ENTER</Button>
+      <br />
+      <br />
+      
+
+      {/* <Button onClick={pin}>PIN</Button> */}
       <Dictaphone 
           Name = {displayName}
           addSpeakTime={props.addSpeakTime}
@@ -129,7 +135,7 @@ const YOYO = (props) => {
       <>
         <h1>Crate a Meeting</h1>
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
-        <button onClick={() => setOnCall(true)}> Let&apos;s start!</button>
+        <Button onClick={() => setOnCall(true)}> Let&apos;s start!</Button>
         
       </>
     )

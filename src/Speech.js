@@ -1,6 +1,6 @@
 import React , {Component, useState ,useEffect ,props}  from 'react';
 import Layout from './components/Layout';
-import {Header, Grid} from 'semantic-ui-react';
+import {Header, Grid, Button} from 'semantic-ui-react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import YOYO from './YOYO';
 class Speech_test extends Component {
@@ -91,9 +91,9 @@ const stop_listen= () => {
       {/* <p>{transcript}</p> */}
       <div>cumulate</div>
       <div>{cumulate}</div>
-      <button onClick={start_listen}>start</button>
-      <button onClick={stop_listen}>stop</button>
-      <button onClick={reset_cumulate}>reset_cumulate</button>
+      <Button onClick={start_listen}>start</Button>
+      <Button onClick={stop_listen}>stop</Button>
+      <Button onClick={reset_cumulate}>reset_cumulate</Button>
       <br/>
       <Dictaphone />
     </div>
@@ -150,9 +150,9 @@ const Dictaphone = (props) => {
     
     return (
       <div>
-        <button onClick={SpeechRecognition.startListening}>Start</button>
-        <button onClick={SpeechRecognition.stopListening}>Stop</button>
-        <button onClick={reset_cumulate}>reset_cumulate</button>
+        <Button secondary onClick={SpeechRecognition.startListening}>Start</Button>
+        <Button secondary onClick={SpeechRecognition.stopListening}>Stop</Button>
+        <Button secondary onClick={reset_cumulate}>reset_cumulate</Button>
         <p>{transcript}</p>
         
       </div>
