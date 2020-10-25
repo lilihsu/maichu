@@ -5,6 +5,7 @@ import imageDataURI from 'image-data-uri';
 import base64Img from 'base64-img';
 import dataURLtoBlob from 'dataurl-to-blob';
 import Dictaphone from './Speech';
+import { pink } from 'color-name';
 const YOYO = (props) => {
  
 
@@ -24,12 +25,15 @@ const YOYO = (props) => {
   //     screenshot();
   //   }
   // }, 500);
-
+  
   useEffect(()=>{
     database.ref('candidate').on('value',e=>{
       setChsnName(e.val().id);
       console.log(e.val())
     });
+    if(chsnName!==''){
+      pin()
+    }
   })
 
   const uploadImage = (image)=>{
@@ -43,7 +47,22 @@ const YOYO = (props) => {
     console.log(temp);
     props.test(temp)
   }
+  const pin = async () => {
+    let participantId;
+    let temp = await api.getParticipantsInfo();
+    setuserlist(temp);
 
+    for(let i of temp){ //
+      //console.log(i);
+      if(i.displayName == displayName){
+        //console.log(i.displayName)
+        participantId = i.participantId
+        await api.pinParticipant(participantId);
+        break;
+      }
+    }
+    
+  }
   const getdevice = async() => {
     console.log(await api.getCurrentDevices());
   }
@@ -90,13 +109,17 @@ const YOYO = (props) => {
         password={password}
         containerStyle={{ width: props.width, height: '600px' }}
         frameStyle={{display:true}}
-        onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI)}}
+        onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI);if(chsnName == displayName){pin()}}}
       />
       <button onClick={showuser}>press</button>
       <button onClick={getdevice}>getdevice</button>
-      <input type='text' placeholder='Send Message!' value={sendmessage} onChange={e => setSendMessage(e.target.value)} />
       <button onClick={screenshot}>ENTER</button>
-      <Dictaphone Name = {displayName}/>
+      {/* <button onClick={pin}>PIN</button> */}
+      <Dictaphone 
+          Name = {displayName}
+          addSpeakTime={props.addSpeakTime}
+          getSpeakTime={props.getSpeakTime}
+          />
       {/* <img  src={receivemessage} width='400px' height='300px'/> */}
       
       </>

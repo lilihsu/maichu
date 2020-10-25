@@ -23,15 +23,50 @@ class App extends Component {
     }
     
   }
+  // selected_listener = async (event, name) => {
+  //   event.preventDefault();
+  //   var result = false;
+  //   await database.ref('Selected').once('value').then((es)=>{
+  //     if(es.exists()){
+  //       es.forEach(function(e){
+  //           if(name = e.key){
+  //             result = true;
+  //           }
+  //       })
+  //     }
+  //   });
+  //   return result;
+  // }
+  // Teacher_select_speaker = async (name)=>{
 
+  //   console.log(name)
+  //   let preTime=0;
+  //   await database.ref('speakTime/'+name).once('value').then(e=>{
+  //     if(e.exists())
+  //       preTime=e.val().time;
+  //   });
+  //   await database.ref('Selected/'+name).set({time:preTime});
+  // }
   addSpeakTime=async(name,time)=>{
+    let selectedName;
+    let selectedTime;
+    await database.ref('Selected').once('value').then((es)=>{
+      if(es.exists()){
+        es.forEach(function(e){
+            selectedName = e.key;
+            selectedTime = e.val().time;
+        })
+      }
+    })
     let preTime=0;
     await database.ref('speakTime/'+name).once('value').then(e=>{
       if(e.exists())
         preTime=e.val().time;
     })
-    await database.ref('speakTime/'+name).set({time:preTime+time})
-
+    await database.ref('speakTime/'+name).set({time:preTime+time});
+    if(selectedTime -　preTime > 10000){
+      await database.ref('Selected').remove();
+    }
   }
   getSpeakTime=async()=>{
     let result=[]
@@ -43,7 +78,9 @@ class App extends Component {
       }
     })
     console.log(result)
-    return result
+    return result.sort((a,b)=>{
+      return a.time -b.time
+    });
   }
 
   setGroupCount=async(gName,op)=>{
@@ -83,19 +120,28 @@ class App extends Component {
                 <Administrator 
                   group1={this.state.group1} 
                   group2={this.state.group2} 
-                  logiGroup={this.state.logiGroup}/>
+                  logiGroup={this.state.logiGroup}
+                  addSpeakTime={this.addSpeakTime}
+                  getSpeakTime={this.getSpeakTime}
+                  />
               </Route>
               <Route path="/admin">
                 <Administrator 
                   group1={this.state.group1} 
                   group2={this.state.group2} 
-                  logiGroup={this.state.logiGroup}/>
+                  logiGroup={this.state.logiGroup}
+                  addSpeakTime={this.addSpeakTime}
+                  getSpeakTime={this.getSpeakTime}
+                  />
               </Route>
               <Route path="/participant">
                 <Participant  
                   group1={this.state.group1} 
                   group2={this.state.group2} 
-                  logiGroup={this.state.logiGroup}/>
+                  logiGroup={this.state.logiGroup}
+                  addSpeakTime={this.addSpeakTime}
+                  getSpeakTime={this.getSpeakTime}
+                 />
               </Route>
             </Switch>
           </Router>

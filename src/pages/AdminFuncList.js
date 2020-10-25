@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import { Grid, Button,Form,Message,Input } from 'semantic-ui-react';
-import { storage } from "../firebase";
+import { storage ,database} from "../firebase";
+
 class FunctionHelper extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,8 @@ class FunctionHelper extends Component {
             qa: false,
             array : [],
             processedUserList: [],
-            qqaamode:true
+            qqaamode:true,
+            rank:[]
         }
     }
 
@@ -33,7 +35,9 @@ class FunctionHelper extends Component {
     handleGroup = () => {
         this.setState({de:false, group: true, queue: false, qa: false ,cs: false})
     }
-    handleQueue = () => {
+    handleQueue = async () => {
+        let rank = await this.props.getSpeakTime();
+        this.setState({rank: rank});
         this.setState({de:false, group: false, queue: true, qa: false ,cs: false})
     }
     handleQA = () => {
@@ -78,11 +82,7 @@ class FunctionHelper extends Component {
                             Q/A Mode
                         </Button>
                     </Grid.Row>
-                    <Grid.Row centered>
-                        <Button onClick={this.handleCS}>
-                            Choose speaking
-                        </Button>
-                    </Grid.Row>
+                    
                     <Grid.Row centered>
                         <Button onClick={this.getuserlist}>
                             get user
@@ -93,10 +93,8 @@ class FunctionHelper extends Component {
                     </Grid.Row>
                 </Grid>) : 
                 this.state.group ? <Group handler={this.handleBack} /> : 
-                this.state.queue ? <Queue handler={this.handleBack} userlist={this.state.processedUserList}/> :
+                this.state.queue ? <Queue handler={this.handleBack} rank={this.state.rank} /> :
                 this.state.qa ? <QA handler={this.handleBack}  mode={this.state.qqaamode}/> : 
-                 
-                this.state.cs ? <ChooseSpeaker handler={this.handleBack} /> : 
                 <EmotionDetect handler={this.handleBack} 
                     emotion={this.props.emotion}
                 />
@@ -119,7 +117,12 @@ class Group extends Component {
 }
 
 class Queue extends Component {
-    
+    chooseSpeaker= async (name)=>{
+        await database.ref('candidate').set({id:name});
+        setTimeout(()=>{
+            database.ref('candidate').set({id:''});
+        },10000)
+      }
     render(){
         return (
             <>
@@ -127,8 +130,13 @@ class Queue extends Component {
             <Button icon="angle left" onClick={this.props.handler} />
             <br/>
             <br/>
-            {this.props.userlist.map((user)=>
-                <Button>{user.displayName}</Button>
+            {this.props.rank.map((user)=>
+            <>
+            <div key={user.name}>
+                <Button onClick={()=>{this.chooseSpeaker(user.name)}}>{user.name}</Button>
+                <div>speakTime : {user.time/1000} seconds</div>
+                </div>
+                </>
             )}
             </>
             );
