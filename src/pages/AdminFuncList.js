@@ -121,7 +121,7 @@ class Queue extends Component {
         await database.ref('candidate').set({id:name});
         setTimeout(()=>{
             database.ref('candidate').set({id:''});
-        },10000)
+        },100)
       }
     render(){
         return (

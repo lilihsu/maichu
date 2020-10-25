@@ -33,6 +33,7 @@ const YOYO = (props) => {
     });
     if(chsnName!=='' && flag){
       pin()
+      
     }
   })
 
@@ -54,7 +55,7 @@ const YOYO = (props) => {
 
     for(let i of temp){ //
       //console.log(i);
-      if(i.displayName == displayName){
+      if(i.displayName == chsnName){
         //console.log(i.displayName)
         participantId = i.participantId
         await api.pinParticipant(participantId);
