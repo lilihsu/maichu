@@ -17,7 +17,7 @@ const YOYO = (props) => {
   const [onCall, setOnCall] = useState(false)
   const [userlist, setuserlist] = useState('')
   const [api,setapi] = useState('');
-  const [flag = false ,setflag] = useState('');
+  const [flag  ,setflag] = useState(false);
   const [picArray,setpicArray] = useState([]);
   const [chsnName,setChsnName]=useState('');
   // setTimeout(() => {
@@ -31,7 +31,7 @@ const YOYO = (props) => {
       setChsnName(e.val().id);
       console.log(e.val())
     });
-    if(chsnName!==''){
+    if(chsnName!=='' && flag){
       pin()
     }
   })
@@ -109,7 +109,7 @@ const YOYO = (props) => {
         password={password}
         containerStyle={{ width: props.width, height: '600px' }}
         frameStyle={{display:true}}
-        onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI);if(chsnName == displayName){pin()}}}
+        onAPILoad={JitsiMeetAPI => {console.log('Good Morning everyone!'); setapi(JitsiMeetAPI);setflag(true);if(chsnName == displayName){pin()}}}
       />
       <button onClick={showuser}>press</button>
       <button onClick={getdevice}>getdevice</button>
