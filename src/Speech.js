@@ -106,26 +106,39 @@ const Dictaphone = (props) => {
     const [end ,setend] = useState(0);
     const [cumulate ,setcumulate] = useState(0);
     const [start_flag ,setstart_flag] = useState(true);
-
+    const [lasttime ,setlasttime] = useState(new Date().getTime());
+    
+      
     useEffect(() => {
-        console.log('value changed!', transcript)
-        console.log(cumulate)
-        console.log(start);
-        console.log(end);
+        // console.log('value changed!', transcript)
+        // console.log(cumulate)
+        // console.log(start);
+        // console.log(end);
         if(transcript != ''){ 
             let t = new Date().getTime();
-            console.log(t);
+            //console.log(t);
             if(start_flag){
                 setstart(t);
                 setstart_flag(false);
-            }else{
-                setend(t);
-                let add =  cumulate + t - start;
-                setcumulate(add);
-                setstart_flag(true);
             }
         }
+        if(!start_flag && transcript==''){
+          let t = new Date().getTime();
+                setend(t);
+                let add =  t - start;
+                
+                
+                  console.log("cumulate");
+                  props.addSpeakTime(props.Name,add);
+                  
+            
+
+                setstart_flag(true);
+            }
     });
+    
+    
+
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
       return null
     }
@@ -134,7 +147,6 @@ const Dictaphone = (props) => {
     const reset_cumulate = () => {
         setcumulate(0);
     }
-
     
     return (
       <div>
@@ -142,8 +154,6 @@ const Dictaphone = (props) => {
         <button onClick={SpeechRecognition.stopListening}>Stop</button>
         <button onClick={reset_cumulate}>reset_cumulate</button>
         <p>{transcript}</p>
-        <div>cumulate</div>
-        <div>{props.Name} already spoke {cumulate/1000} sec</div>
         
       </div>
     )

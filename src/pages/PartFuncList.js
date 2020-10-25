@@ -17,12 +17,8 @@ class FunctionHelper extends Component {
     handleBack = (e) => {
         this.setState({de:true, group: false})
     }
-    chooseSpeaker=(name)=>{
-        database.ref('candidate').set({id:name})
-      }
-    clearSpeaker=()=>{
-        database.ref('candidate').set({id:''})
-    }
+    
+   
     render() {
         
         return(

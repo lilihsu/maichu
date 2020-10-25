@@ -41,10 +41,23 @@ class Administrator extends Component {
             <Grid.Row>
               <Grid.Column width={13}>
                 {/* <Conference inline-block /> */}
-                <YOYO inline-block  test={this.setV} roomName={this.state.roomName}/>
+                <YOYO inline-block  
+                    test={this.setV} 
+                    roomName={this.state.roomName}
+                    addSpeakTime={this.props.addSpeakTime}
+                    getSpeakTime={this.props.getSpeakTime}
+                    
+                    />
               </Grid.Column>
               <Grid.Column width={3}>
-                <AdminFuncHelper  userlist={this.state.arr} roomName={this.state.roomName} emotion={this.state.emotion}/>
+                <AdminFuncHelper  
+                  userlist={this.state.arr} 
+                  roomName={this.state.roomName} 
+                  emotion={this.state.emotion}
+                  addSpeakTime={this.props.addSpeakTime}
+                  getSpeakTime={this.props.getSpeakTime}
+                  
+                   />
               </Grid.Column>
             </Grid.Row>
           </Grid>
