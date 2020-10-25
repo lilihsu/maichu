@@ -133,7 +133,7 @@ const YOYO = (props) => {
       )
     : (
       <>
-        <h1>Crate a Meeting</h1>
+        <h1>Create a Meeting</h1>
         <input type='text' placeholder='Your name' value={displayName} onChange={e => setDisplayName(e.target.value)} />
         <Button onClick={() => setOnCall(true)}> Let&apos;s start!</Button>
         
