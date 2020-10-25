@@ -1,0 +1,11 @@
+opencv-python
+setuptools==41.0.0
+tensorflow
+numpy==1.17.4
+imutils
+pyrebase
+dlib==19.21.0
+scikit-image
+scipy
+
+#tensorboard 2.3.0 has requirement requests<3,>=2.21.0, but you'll have requests 2.11.1 which is incompatible.
